@@ -43,11 +43,7 @@ export default class NotebookController extends Controller {
   searchNotePad(e) {
     if (e.target.value) {
       this.isSearching = true;
-      this.filteredNotebook = this.model.notebook.notes
-        .toArray()
-        .filter((note) =>
-          note.name.toLowerCase().includes(e.target.value.toLowerCase())
-        );
+      this.filteredNotebook = this.model.notebook.notes.toArray().filter((note) => note.name.toLowerCase().includes(e.target.value.toLowerCase()) || note.content.toLowerCase().includes(e.target.value.toLowerCase()));
     } else {
       this.isSearching = false;
     }

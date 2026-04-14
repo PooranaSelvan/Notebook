@@ -5,7 +5,7 @@
           <img src='/images/cover.png' class="h-60 w-40 rounded-xl" alt="ok" />
      </div>
      <input value={{@model.name}} {{on "change" (fn this.updateNotebookName @model.id)}} class="text-white text-center w-full p-1 w-0 outline-0 border-2 border-white rounded-xl" />
-     <button type="button" class="absolute top-10 right-7 p-2 bg-red-400 rounded-full opacity-0 group-hover:opacity-100 transition ease-in-out delay-100 text-black z-10 cursor-pointer"> 🗑 </button>
+     <button type="button" {{on "click" (fn this.deleteNotebook @model.id)}} class="absolute top-10 right-7 p-2 bg-red-400 rounded-full opacity-0 group-hover:opacity-100 transition ease-in-out delay-100 text-black z-10 cursor-pointer"> 🗑 </button>
      <LinkTo @route="notebook" class="text-white" @model={{@model.id}}>Go Back</LinkTo>
 </div>
 {{outlet}}
