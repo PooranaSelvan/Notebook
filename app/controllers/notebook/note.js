@@ -1,22 +1,27 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class NoteController extends Controller {
   @service notebook;
 
+  @tracked noteName = this.model.note.name;
+  @tracked noteContent = this.model.note.content;
+
   @action
-  updateNoteName(noteId, e) {
-    this.notebook.updateNotePadName(noteId, e.target.value);
+  updateNoteName(e) {
+    this.noteName = e.target.value;
   }
 
   @action
-  updateNoteContent(noteId, e) {
-    this.notebook.updateNotePadContent(noteId, e.target.value);
+  updateNoteContent(e) {
+    this.noteContent = e.target.value;
   }
 
   @action
-  updateNote(noteId, noteName, noteContent) {
-    this.notebook.updateNotePad(noteId, noteName, noteContent);
+  saveNote(noteId) {
+    this.notebook.updateNotePad(noteId, this.noteName, this.noteContent);
+    alert("Saved Successfully!");
   }
 }

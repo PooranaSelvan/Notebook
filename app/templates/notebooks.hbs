@@ -3,21 +3,36 @@
      <h1 class="text-3xl text-white">Notebooks</h1>
      
      {{#if @model.length}}
-          <div class="flex flex-wrap items-center justify-center w-full">
-               <input type="text" {{on "input" this.searchNotebooks}} placeholder="Search notebooks..." class="text-white placeholder-gray-400 border border-gray-700 outline-none px-5 py-2.5 w-xl rounded-xl" />
+          <div class="flex flex-wrap items-center justify-center flex-col gap-10 w-full">
+               <input type="text" {{on "input" this.searchGlobal}} placeholder="Search notebooks..." class="text-white placeholder-gray-400 border border-gray-700 outline-none px-5 py-2.5 w-xl rounded-xl" />
+               {{#if this.isSearching}}
+                    <div class="flex flex-wrap justify-center flex-col gap-1 text-white w-xl border-1 border-gray-400 p-2 rounded-xl">
+                         {{#if this.filteredAll.length}}
+                              {{#each this.filteredAll as |notebook|}}
+                                   <LinkTo @route="notebook" @model={{notebook.notebook.id}} class="text-white font-bold">
+                                     {{notebook.notebook.name}}
+                                   </LinkTo>
+
+                                   <div class="ml-6 flex flex-col gap-1">
+                                        {{#each notebook.notes as |note|}}
+                                             <LinkTo @route="notebook.note" @models={{array (get note "notebook.id") note.id}} class="text-gray-400">
+                                                  • {{note.name}}
+                                             </LinkTo>
+                                        {{/each}}
+                                   </div>
+                              {{/each}}
+                         {{else}}
+                              <p class="text-center">No Results Found!</p>
+                         {{/if}}
+                    </div>
+               {{/if}}
           </div>
      {{/if}}
 
      <div class="flex flex-wrap items-center justify-center gap-10 mt-10 relative w-full">
-          {{#if this.isSearching}}
-               {{#each this.filteredNotebooks as |book|}}
-                    <Notebookcard @book={{book}} @deleteBook={{this.deleteNotebook}} @updateName={{this.updateNotebookName}} />
-               {{/each}}
-          {{else}}
-               {{#each @model as |book|}}
-                    <Notebookcard @book={{book}} @deleteBook={{this.deleteNotebook}} @updateName={{this.updateNotebookName}} />
-               {{/each}}
-          {{/if}}
+          {{#each @model as |book|}}
+               <Notebookcard @book={{book}} @deleteBook={{this.deleteNotebook}} @updateName={{this.updateNotebookName}} />
+          {{/each}}
      </div>
      <LinkTo @route="create-notebook" class="px-10 py-3 rounded-sm bg-fuchsia-200 cursor-pointer text-black">Create Notebook</LinkTo>
      {{outlet}}
