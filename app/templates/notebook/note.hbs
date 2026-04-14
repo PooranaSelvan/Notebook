@@ -1,0 +1,20 @@
+{{page-title "Note"}}
+<div class="flex flex-wrap items-center justify-center flex-col h-screen w-screen absolute top-0 left-0">
+     <form class="flex flex-wrap items-center flex-col bg-fuchsia-200 w-7xl h-full p-10 relative">
+          <div class="flex flex-wrap items-center justify-end gap-5 w-full">
+               <button type="button" title="Save" class="p-1.5 rounded-full border-2 border-black cursor-pointer text-black">
+                    <img src="/images/save.svg" alt="ok" class="h-7 w-7" />
+               </button>
+               <LinkTo @route="notebook" title="Close" @model={{@model.notebookId}} type="button" class="p-2 rounded-full bg-red-400 cursor-pointer text-black">
+                    <img src="/images/close.svg" alt="ok" class="h-7 w-7" />
+               </LinkTo>
+          </div>
+          <div>
+               <NoteHeader />
+          </div>
+          <input class="text-4xl font-bold text-center border-0 outline-0" value={{@model.note.name}} {{on "change" (fn this.updateNoteName @model.note.id)}} />
+          <hr class="w-full my-2" />
+          <textarea class="border-0 outline-0 w-full flex-1 mt-5" value={{@model.note.content}} {{on "change" (fn this.updateNoteContent @model.note.id)}} />
+     </form>
+</div>
+{{outlet}}

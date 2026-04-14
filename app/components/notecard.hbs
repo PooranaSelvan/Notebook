@@ -1,0 +1,11 @@
+{{yield}}
+
+<div class="relative group">
+     <LinkTo @route="notebook.note" @model={{@note.id}}>
+          <div class="flex flex-wrap flex-col gap-2 mt-2 bg-fuchsia-300 h-80 w-80 p-5">
+               <h1 class="font-bold text-2xl">{{@note.name}}</h1>
+               <p>{{reducesize @note.content}}</p>
+          </div>
+     </LinkTo>
+     <button type="button" class="absolute -top-2 p-2 bg-white rounded-full -right-4 opacity-0 group-hover:opacity-100 transition transition ease-in-out delay-100 text-black z-10 cursor-pointer" {{on "click" (fn @deleteNotePad @note.id)}}> 🗑 </button>
+</div>

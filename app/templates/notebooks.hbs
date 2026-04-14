@@ -1,0 +1,24 @@
+{{page-title "Notebooks"}}
+<div class="flex flex-wrap items-center justify-center flex-col gap-10 w-full p-10">
+     <h1 class="text-3xl text-white">Notebooks</h1>
+     
+     {{#if @model.length}}
+          <div class="flex flex-wrap items-center justify-center w-full">
+               <input type="text" {{on "input" this.searchNotebooks}} placeholder="Search notebooks..." class="text-white placeholder-gray-400 border border-gray-700 outline-none px-5 py-2.5 w-xl rounded-xl" />
+          </div>
+     {{/if}}
+
+     <div class="flex flex-wrap items-center justify-center gap-10 mt-10 relative w-full">
+          {{#if this.isSearching}}
+               {{#each this.filteredNotebooks as |book|}}
+                    <Notebookcard @book={{book}} @deleteBook={{this.deleteNotebook}} @updateName={{this.updateNotebookName}} />
+               {{/each}}
+          {{else}}
+               {{#each @model as |book|}}
+                    <Notebookcard @book={{book}} @deleteBook={{this.deleteNotebook}} @updateName={{this.updateNotebookName}} />
+               {{/each}}
+          {{/if}}
+     </div>
+     <LinkTo @route="create-notebook" class="px-10 py-3 rounded-sm bg-fuchsia-200 cursor-pointer text-black">Create Notebook</LinkTo>
+     {{outlet}}
+</div>

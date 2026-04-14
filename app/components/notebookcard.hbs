@@ -1,0 +1,11 @@
+{{yield}}
+
+<div class="relative group">
+     <LinkTo @route="notebook" @model={{@book.id}}>
+          <div class="flex flex-wrap items-center justify-center flex-col gap-2 text-white cursor-pointer group relative">
+               <img src='/images/cover.png' class="h-60 w-40 rounded-xl" alt="ok" />
+          </div>
+     </LinkTo>
+     <input value={{@book.name}} class="text-white text-center w-full p-0 w-0 outline-0" {{on "change" (fn @updateName @book.id)}} />
+     <button type="button" class="absolute -top-3 right-6 bg-red-400 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition ease-in-out delay-100 text-black z-10 cursor-pointer" {{on "click" (fn @deleteBook @book.id)}}> 🗑 </button>
+</div>

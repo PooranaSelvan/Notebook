@@ -1,0 +1,12 @@
+{{page-title "CreateNotebook"}}
+<div class="flex flex-wrap items-center justify-center flex-col gap-10 mt-10 relative text-white">
+     <form class="flex flex-wrap items-center justify-center flex-col gap-5 p-8 w-full mx-auto rounded-xl shadow-lg bg-opacity-10 backdrop-blur-md" {{on "submit" this.createNoteBook}}>
+          <h2 class="text-xl font-semibold text-white text-center">Create Notebook</h2>
+          <input type="text" placeholder="Enter the Notebook Name" class="w-full border-1 border-white px-6 py-3 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-white" {{on "input" this.updateFormName}} />
+          <div class="flex gap-4 w-full justify-center">
+               <button type="submit" class="px-10 py-3 rounded-sm bg-fuchsia-200 cursor-pointer text-black">Create Notebook</button>
+               <LinkTo @route="notebooks" class="px-8 py-3 rounded-md bg-red-300 cursor-pointer text-black">Cancel</LinkTo>
+          </div>
+     </form>
+</div>
+{{outlet}}

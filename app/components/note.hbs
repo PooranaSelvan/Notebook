@@ -1,0 +1,21 @@
+{{yield}}
+
+<div class="flex flex-wrap items-center justify-center flex-col h-screen w-screen z-10 absolute top-0 left-0">
+     <div class="flex flex-wrap items-center flex-col bg-fuchsia-200 w-7xl h-full p-10 relative">
+          <div class="flex flex-wrap items-center justify-end gap-5 w-full">
+               <button type="button" {{on "click" (fn @createNotePad @notebookId)}} title="Save" class="p-1.5 rounded-full border-2 border-black cursor-pointer text-black">
+                    <img src="/images/save.svg" alt="ok" class="h-7 w-7" />
+               </button>
+               <button type="button" {{on "click" @onClose}} class="p-2 rounded-full bg-red-400 cursor-pointer text-black" title="Close">
+                    <img src="/images/close.svg" alt="ok" class="h-7 w-7" />
+               </button>
+          </div>
+          <div>
+               <NoteHeader />
+          </div>
+          <input class="text-4xl font-bold text-center border-0 outline-0 w-full mt-2" {{on "change" @updateName}} />
+          <hr class="w-full my-2" />
+          <textarea value={{this.model.content}} class="border-0 outline-0 w-full flex-1 mt-5" {{on "change"
+               @updateContent}} />
+     </div>
+</div>
